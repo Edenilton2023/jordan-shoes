@@ -1,0 +1,227 @@
+:root{
+    --brand_color:#7CA2F4;
+    --dark:#121214;
+    --white_soft:#F3F7FF;
+    --white:#ffffff;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100%;
+    height: 100%;
+    font-family: Archivo, sans-serif;
+}
+.top_fixed{
+width: 100%;
+height: 64px;
+background-color: var(--white_soft);
+font-weight: 500;
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+.hero{
+
+    width: 100%;
+    height: 400px;
+    background-image: url('../images/image-michael-jordan.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+     
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.hero__content{
+
+    width:60%;
+    height: auto;
+    color: var(--white);
+   
+}
+
+.hero__content h1, .hero__content p{
+
+    font-size: 24px;
+    margin-bottom: 20px;
+ padding: auto;
+   
+   }
+.hero__content h2 {
+
+    font-size: 32px;
+    margin-bottom: 20px;
+    padding: auto;
+
+}
+ .hero__content p {
+    line-height: 35px;
+}
+ main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+ .produtos{
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+   
+    width: 100%;
+    height: 100%;
+    margin-block: 80px;
+    
+ }
+ .heading__produtos{
+   
+   
+    width: 590px;
+    height: 100%;
+    margin-bottom: 75px;
+ }
+  .heading__produtos h3{
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+.heading__produtos p{
+            font-size: 24px;
+}
+.lista__produtos{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+
+}
+.card__produtos{
+  
+    width: 336px;
+    height: 326px;
+    flex-basis: 336px;
+}
+.card__produtos figure{
+    width: 100%;
+    height: 200px;
+    background-color: var(--white_soft);
+
+        display: flex;
+            align-items: center;
+            justify-content: center;
+}
+.card__produtos_detalhes{
+    margin-block: 24px;
+}
+.card__produtos_detalhes h4{
+    font-size: 18px;
+        line-height: 28px;
+}
+.card__produtos_detalhes h5 {
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--brand_color);
+}
+/* preço */
+.card__produtos h6{
+font-size: 20px;
+line-height: 30px;
+font-family: "space grotesk, sans-serif";
+}
+/* responsividade */
+@media (max-width: 768px){
+.top_fixed{
+    height: 41px;
+    font-size: 16px;
+}
+.hero{
+    height: 350px;
+}
+.hero__content h1{
+    font-size: 18px;
+}
+.hero__content h2 {
+    font-size: 24px;
+}
+.hero__content p {
+    font-size: 18px;
+    line-height: 28px;
+}
+.heading__produtos{
+    padding-inline: 150px;
+}
+.heading__produtos h3{
+    font-size: 24px;
+}
+.heading__produtos p {
+    font-size: 22px;
+    line-height:26px ;
+}
+.lista__produtos{
+    margin-block:32px ;
+    gap: 32px;
+}
+.card__produtos_detalhes h4{
+    font-size: 17px;
+}
+.card__produtos_detalhes h5 {
+    font-size: 15px;
+}
+.card__produtos h6{
+    font-size: 19px;
+}
+
+ }
+
+
+@media (max-width: 375px) {
+.top_fixed {
+        height: 39px;
+     
+    }
+
+  
+
+  
+
+    .hero__content p {
+        font-size: 16x;
+        line-height: 26px;
+    }
+
+    .heading__produtos h3 {
+        font-size: 20x;
+       
+    }
+
+    .heading__produtos p {
+        font-size: 14px;
+        line-height: 24px
+        
+    }
+
+    .lista__produtos {
+        margin-block: 24px;
+        gap: 24px;
+    }
+
+    .card__produtos_detalhes h4 {
+        font-size: 15px;
+    }
+
+    
+
+   
+}
