@@ -70,6 +70,7 @@ justify-content: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
  }
  .produtos{
     display: flex;
@@ -113,7 +114,7 @@ justify-content: center;
     height: 326px;
     flex-basis: 336px;
 }
-.card__produtos figure{
+.card__produtos figure ,.produto__detalhes_imagens figure{
     width: 100%;
     height: 200px;
     background-color: var(--white_soft);
@@ -125,17 +126,17 @@ justify-content: center;
 .card__produtos_detalhes{
     margin-block: 24px;
 }
-.card__produtos_detalhes h4{
+.card__produtos_detalhes h4,.detalhes h4 {
     font-size: 18px;
         line-height: 28px;
 }
-.card__produtos_detalhes h5 {
+.card__produtos_detalhes h5 ,.detalhes h5 {
     font-size: 16px;
     line-height: 26px;
     color: var(--brand_color);
 }
 /* preço */
-.card__produtos h6{
+.card__produtos h6 ,.detalhes h6{
 font-size: 20px;
 line-height: 30px;
 font-family: "space grotesk, sans-serif";
@@ -225,3 +226,61 @@ font-family: "space grotesk, sans-serif";
 
    
 }
+/* aula 007 detalhes do produtos */
+.produto__detalhes{
+    border: 1px solid red;
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+    /* align-items: center; */
+    justify-content: center;
+
+
+
+}
+.produto__detalhes_imagens{
+    border: 1px solid green;
+    display: grid           ;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    
+}
+.detalhes, .tamanho,.botao ,.descricao{
+    margin-bottom: 20px;
+}
+.botao{
+    width: 100%;
+
+}
+.botao button{
+    width: 90%;
+    height: 50px;
+    background-color: var(--dark);
+    color: var(--white);
+    border-radius: 30px;
+    border: 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

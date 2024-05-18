@@ -1,4 +1,15 @@
-console.log('Jordan Shoes');
+
+
+// convertendo pra moeda
+// a aula
+// https://www.youtube.com/watch?v=p2vg8PiFbJE
+const formatCurrency= (number)=> {
+    return number.toLocaleString('pt-BR',{
+        style: "currency",
+        currency:"BRL",
+    })
+}
+
 
 const getProducts = async ()=>{
     const response = await fetch(" js/products.json")
@@ -18,7 +29,7 @@ card.innerHTML = `   <figure>       <img src="images/${product.image}" alt="${pr
             <div class="card__produtos_detalhes">  <h4>${product.product_name}</h4>
                <h5>${product.product_name}</h5>
                </div>
-               <h6>R$ ${product.price}</h6>
+               <h6>${formatCurrency(product.price)}</h6>
 `;
 const listaProdutos = document.querySelector('.lista__produtos')
 listaProdutos.appendChild(card)
