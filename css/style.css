@@ -131,8 +131,15 @@ cursor: pointer;
     margin-block: 24px;
 }
 .card__produtos_detalhes h4 {
-    font-size: 18px;
-        line-height: 28px;
+font-size: 18px;
+line-height: 28px;
+/* ajuste na aula 09 */
+/* quando a palavra nao cabe no espoço  subititui por ... */
+white-space: nowrap;
+width: 100%;
+overflow: hidden;
+text-overflow: ellipsis;
+    
 }
 .card__produtos_detalhes h5  {
     font-size: 16px;
@@ -294,15 +301,35 @@ font-family: "space grotesk, sans-serif";
     margin-bottom: 10px;
 }
 
-.tamanhos{ 
-    display: grid;
-    grid-template-columns: 4,1fr;
+.tamanhos { 
+    display:flex;
+   flex-direction: column;
     gap: 8px;
+    background-color: #7CA2F4;
     
 }
-.numeros{
+.numeros {
     height: 40px;
     border: 1px solid #ccc;
+    /* aula 10 */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* aula 10 */
+.numeros:hover {
+    border-color: var(--dark);
+    cursor: pointer;
+}
+
+.radio {
+    display: none;
+}
+
+.selecionado {
+    border-color: var(--dark);
 }
 .descricao{
     font-size: 16px;
@@ -395,9 +422,20 @@ position: relative;
 
 }
 details a{
-    color: var(--dark);
+    color: var(--dark);     
     font-weight: bold;
     margin-top: 20px;
 
     
+}
+.voltar{
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+}
+.voltar:hover{
+    cursor: pointer;
+    border: 1px solid var(--brand_color);
+    background-color: var(--white_soft);
 }
