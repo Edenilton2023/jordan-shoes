@@ -8,8 +8,16 @@
 const selectionProdutos = document.querySelector('.produtos');
 const botaoVoltar = document.querySelector(".voltar")
 const selectorDetalhesProdutos = document.querySelector('.produto__detalhes');
-botaoVoltar.style.display = 'none'
+const sectionHero = document.querySelector('.hero')
+  const botaoCarrinho = document.querySelector('.btn__carrinho .icone');
+  const sectionCarrinho = document.querySelector('.carrinho');
+  const btnHome =document.querySelector('.link_home')
+const ocutarBotaoEscoder = () => {
+  botaoVoltar.style.display = 'none'
 selectorDetalhesProdutos.style.display = 'none'
+}
+ocutarBotaoEscoder()
+
 
 
 const formatCurrency= (number)=> {
@@ -60,19 +68,15 @@ const produtoClicado = products.find(product => product.id ==idProduto)
 //console.log(produtoClicado);
 preencheDadosProdutos(produtoClicado)
 })
-
-
     })
     }
 
     generateCard()
     botaoVoltar.addEventListener('click', () => {
         selectionProdutos.style.display = 'flex';
-          botaoVoltar.style.display = 'none';
-      selectorDetalhesProdutos.style.display = 'none';
-      
-    
-    });
+      ocutarBotaoEscoder()
+        });
+
     const preencheDadosProdutos = (product)=> {
         // preencher imagens
         const images = document.querySelectorAll(
@@ -84,8 +88,36 @@ preencheDadosProdutos(produtoClicado)
       })
     
 
-        // preecher nome,  modelo  e preco
+        // preecher nome, id,  modelo  e preco
+        document.querySelector('.detalhes span').innerHTML= product.id
         document.querySelector('.detalhes h4').innerHTML= product.product_name
         document.querySelector('.detalhes h5').innerHTML= product.product_model
         document.querySelector('.detalhes h6').innerHTML = formatCurrency(product.price)
     }
+
+    /// mudar icone do details frete
+    const deteils = document.querySelector('details')
+    deteils.addEventListener('toggle', ()=>{
+      const summary = document.querySelector('summary')
+      summary.classList.toggle('icone-expandir');
+      summary.classList.toggle('icone-recolher');
+    })
+
+    // mostra pagina do carrinha escoder a outras paginas 
+
+  
+    botaoCarrinho.addEventListener('click',()=>{
+     selectionProdutos.style.display='none'
+     selectorDetalhesProdutos.style.display='none'
+     sectionHero.style.display='none'
+     carrinho.style.display = 'block';
+  
+    })
+    btnHome.addEventListener('click',(event)=>{
+      event.preventDefault()//eviata compartamento padrao para que nao der reflech na pagina
+       sectionCarrinho.style.display = 'none';
+        selectionProdutos.style.display = 'flex';
+        selectorDetalhesProdutos.style.display = 'none';
+        sectionHero.style.display = 'flex';
+       ocutarBotaoEscoder();
+    })
