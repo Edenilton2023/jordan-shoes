@@ -155,7 +155,7 @@ preencheDadosProdutos(produtoClicado)
     const cart =[ ]
     const btnAddCarrinho = document.querySelector('.btn__Add_cart');
     btnAddCarrinho.addEventListener("click",()=>{
-    
+    resetarSelecao(radios);
       // pega dados do produtos adicionado
       const produto = {
         id: document.querySelector('.detalhes span').innerHTML,
@@ -174,6 +174,7 @@ preencheDadosProdutos(produtoClicado)
        sectionHero.style.display="none"
        atualizarCarrinho(cart)
        atualizarNumeroItem()
+
   
     })
     const corpoTabela = document.querySelector(".carrinho tbody")
@@ -186,16 +187,39 @@ preencheDadosProdutos(produtoClicado)
          
            <td>${produto.id}  </td>
            <td>${produto.nome}  </td>
-           <td class="culuna_tamanho">${produto.tamanho}  </td>
-           <td class="culuna_preco">${produto.preco}  </td>
-           <td class="culuna_apagar">
+           <td class="coluna_tamanho">${produto.tamanho}  </td>
+           <td class="coluna_preco">${produto.preco}  </td>
+           <td class="coluna_apagar">
            <span class="material-symbols-outlined" data-id="${produto.id}">delete
         
           </tr>`;
         })
+      
+
+        const total = cart.reduce( (valorAcumulado, item) =>{
+          return valorAcumulado + parseFloat(item.preco.replace('R$&nbsp;','').replace('.','').replace(',','.'))
+        },0)
+        console.log(total);
+         document.querySelector('.coluna_total').innerHTML = formatCurrency(total) 
+
+         acaoBotaoApagar()
     }
     const numeroItens = document.querySelector('.numero_itens')
     const atualizarNumeroItem = ()=>{
       numeroItens.innerHTML= cart.length
-      
+   
+    }
+    const acaoBotaoApagar = () => {
+      const botaoApagar = document.querySelectorAll('.coluna_apagar span')
+      botaoApagar.forEach(botao => {
+        botao.addEventListener('click', () => {
+       
+         const id = botao.getAttribute('data-id')
+          
+             const posicao = cart.findIndex(item => item.id == id) 
+             cart.splice(posicao,1)
+             atualizarCarrinho(cart)
+        })
+      })
+      atualizarNumeroItem()
     }
