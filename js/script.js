@@ -75,6 +75,8 @@ preencheDadosProdutos(produtoClicado)
     botaoVoltar.addEventListener('click', () => {
         selectionProdutos.style.display = 'flex';
       ocutarBotaoEscoder()
+          resetarSelecao(radios); 
+  
         });
 
     const preencheDadosProdutos = (product)=> {
@@ -107,17 +109,93 @@ preencheDadosProdutos(produtoClicado)
 
   
     botaoCarrinho.addEventListener('click',()=>{
+          sectionCarrinho.style.display = 'block';
      selectionProdutos.style.display='none'
      selectorDetalhesProdutos.style.display='none'
      sectionHero.style.display='none'
-     carrinho.style.display = 'block';
+  
   
     })
     btnHome.addEventListener('click',(event)=>{
       event.preventDefault()//eviata compartamento padrao para que nao der reflech na pagina
        sectionCarrinho.style.display = 'none';
         selectionProdutos.style.display = 'flex';
-        selectorDetalhesProdutos.style.display = 'none';
         sectionHero.style.display = 'flex';
        ocutarBotaoEscoder();
     })
+
+    const  radios = document.querySelectorAll('input[type="radio"]')
+    radios.forEach(radio =>{
+      radio.addEventListener('change',()=>{
+        const label = document.querySelector(`label[for="${radio.id}"]`);
+        label.classList.add('selecionado')
+          console.log(label);
+          radios.forEach(radioAtual =>{
+            if (radioAtual!== radio){
+              const outroLabel = document.querySelector(
+                `label[for="${radioAtual.id}"]`);
+              outroLabel.classList.remove('selecionado')
+            }
+          })
+        
+      })
+    })
+    const resetarSelecao = (radios)=>{
+      radios.forEach(radio=>{
+        radios.forEach(radioAtual=>{
+          if (radioAtual !== radio){
+             const outroLabel = document.querySelector(
+                `label[for="${radioAtual.id}"]`)
+                outroLabel.classList.remove('selecionado')
+
+             }
+        })
+      })
+    }
+    const cart =[ ]
+    const btnAddCarrinho = document.querySelector('.btn__Add_cart');
+    btnAddCarrinho.addEventListener("click",()=>{
+    
+      // pega dados do produtos adicionado
+      const produto = {
+        id: document.querySelector('.detalhes span').innerHTML,
+        nome: document.querySelector('.detalhes h4').innerHTML,
+        modelo: document.querySelector('.detalhes h5').innerHTML,
+        preco: document.querySelector('.detalhes h6').innerHTML,
+        tamanho: document.querySelector('input[type="radio"][name="size"]:checked').value
+        
+      }
+       console.log(produto);
+       cart.push(produto) //adicionar o produto ao carrinho
+       console.log(cart);
+       // ocultar botao voltar e secao detalhes produtos
+       ocutarBotaoEscoder()
+       sectionCarrinho.style.display="block"
+       sectionHero.style.display="none"
+       atualizarCarrinho(cart)
+       atualizarNumeroItem()
+  
+    })
+    const corpoTabela = document.querySelector(".carrinho tbody")
+
+    const atualizarCarrinho = (cart)=>{
+      corpoTabela.innerHTML=""//limpar linhas da tabela
+        cart.map( produto =>{
+          corpoTabela.innerHTML += `
+          <tr>
+         
+           <td>${produto.id}  </td>
+           <td>${produto.nome}  </td>
+           <td class="culuna_tamanho">${produto.tamanho}  </td>
+           <td class="culuna_preco">${produto.preco}  </td>
+           <td class="culuna_apagar">
+           <span class="material-symbols-outlined" data-id="${produto.id}">delete
+        
+          </tr>`;
+        })
+    }
+    const numeroItens = document.querySelector('.numero_itens')
+    const atualizarNumeroItem = ()=>{
+      numeroItens.innerHTML= cart.length
+      
+    }
