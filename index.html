@@ -206,13 +206,57 @@ C
           
         </tfoot>
       </table>
+      <div class="carrinho__detalhes">
+        <div class="frete">
+          <label for="cep2">prazo de entrega</label>
+          <div class="input">
+            <input type="text"  id="cep2" placeholder="00000-000"/>
+            <button type="button" class="butao_calcular">Calcular</button>
+
+          </div>
+          <p>tempo Previsto para entrega </p>
+          <a href="htttps://buscarcepinter.correios.com.br/app/endereco/index.php" target="_blank" rel="noopener noreferrer">não sei meu CEP</a>
+        </div>
+        <div class="cupom_desconto">
+          <label for="cupom">Cupom de Desconto</label>
+          <div class="input">
+            <input type="text"  id="cupom"/>
+            <button type="button" class="butao_aplicar">Aplicar</button>
+          </div>
+
+        </div>
+        <div class="resumo">
+          <h3>Resumo</h3>
+          <ul>
+            <li>
+              <span>Valor dos produtos</span>
+              <span class="sub_total">
+              </span>
+            </li>
+            <li>
+              <span>frete</span>
+              <span class="valor_frete"></span>
+            </li>
+            <li>
+            <span>Desconto</span>
+            <span class="valor_desconto"></span>
+            </li>
+            <li>
+             <span>Total da compra</span>
+            <span class="total_compra"></span>
+            </li>
+          </ul>
+          <button type="button" class="butao_continuar">Continuar</button>
+        </div>
+      </div>
     </section>
    </main>
-    <script src="js/script.js"></script>
+    <script src="js/ultils.js " type="module"></script>
+    <script src="js/script.js " type="module"></script>
 
-<!--https://www.youtube.com/watch?v=ViuUml_Cgu0
+<!--https://www.youtube.com/watch?v=z9cl-mR6c-8
     
-        parei em 00:00-->
+        parei em incio-->
     
 </body>
 </html>

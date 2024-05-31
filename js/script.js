@@ -1,31 +1,35 @@
 
-
+import {formatCurrency ,limparFormatoReal } from './ultils.js'
 // convertendo pra moeda
 // a aula
 // https://www.youtube.com/watch?v=p2vg8PiFbJE
 
 // ocutar botar volta e seçao de detalhes do produto
+
+const sectionHero = document.querySelector('.hero')
 const selectionProdutos = document.querySelector('.produtos');
 const botaoVoltar = document.querySelector(".voltar")
 const selectorDetalhesProdutos = document.querySelector('.produto__detalhes');
-const sectionHero = document.querySelector('.hero')
+ const sectionCarrinho = document.querySelector('.carrinho');
   const botaoCarrinho = document.querySelector('.btn__carrinho .icone');
-  const sectionCarrinho = document.querySelector('.carrinho');
-  const btnHome =document.querySelector('.link_home')
-const ocutarBotaoEscoder = () => {
+ 
+  const ocutarElemeto =(elemeto)=>{
+    style.display= "none"
+  }
+  const mostraElemento= (elemeto,display='block')=>{
+    elemeto.style.display= display
+
+  }
+
+
+  //NEVEGAÇAO
+const ocultarVoltarEsecaoDetalhes = () => {
   botaoVoltar.style.display = 'none'
 selectorDetalhesProdutos.style.display = 'none'
 }
-ocutarBotaoEscoder()
+ocultarVoltarEsecaoDetalhes()
 
 
-
-const formatCurrency= (number)=> {
-    return number.toLocaleString('pt-BR',{
-        style: "currency",
-        currency:"BRL",
-    })
-}
 
 
 const getProducts = async ()=>{
@@ -50,6 +54,9 @@ product.image
 <h5>${product.product_name}</h5></div>
 <h6>${formatCurrency(product.price)}</h6>
 `;
+
+
+
 const listaProdutos = document.querySelector('.lista__produtos');
 listaProdutos.appendChild(card);
 // identificando cada card
@@ -72,12 +79,14 @@ preencheDadosProdutos(produtoClicado)
     }
 
     generateCard()
+  const btnHome = document.querySelector('.link_home')
     botaoVoltar.addEventListener('click', () => {
         selectionProdutos.style.display = 'flex';
-      ocutarBotaoEscoder()
+      ocultarVoltarEsecaoDetalhes()
           resetarSelecao(radios); 
   
         });
+
 
     const preencheDadosProdutos = (product)=> {
         // preencher imagens
@@ -88,14 +97,15 @@ preencheDadosProdutos(produtoClicado)
       imagesArray.map(image => {
         image.src = `./images/${product.image}`
       })
-    
-
         // preecher nome, id,  modelo  e preco
         document.querySelector('.detalhes span').innerHTML= product.id
         document.querySelector('.detalhes h4').innerHTML= product.product_name
         document.querySelector('.detalhes h5').innerHTML= product.product_model
         document.querySelector('.detalhes h6').innerHTML = formatCurrency(product.price)
     }
+        //selecionar span do id e ocultar
+    const spanId = document.querySelector('.detalhes span')
+    spanId.style.display= 'none'
 
     /// mudar icone do details frete
     const deteils = document.querySelector('details')
@@ -106,22 +116,18 @@ preencheDadosProdutos(produtoClicado)
     })
 
     // mostra pagina do carrinha escoder a outras paginas 
-
-  
     botaoCarrinho.addEventListener('click',()=>{
           sectionCarrinho.style.display = 'block';
      selectionProdutos.style.display='none'
      selectorDetalhesProdutos.style.display='none'
-     sectionHero.style.display='none'
-  
-  
+     sectionHero.style.display='none' 
     })
     btnHome.addEventListener('click',(event)=>{
       event.preventDefault()//eviata compartamento padrao para que nao der reflech na pagina
        sectionCarrinho.style.display = 'none';
         selectionProdutos.style.display = 'flex';
         sectionHero.style.display = 'flex';
-       ocutarBotaoEscoder();
+       ocultarVoltarEsecaoDetalhes();
     })
 
     const  radios = document.querySelectorAll('input[type="radio"]')
@@ -136,8 +142,7 @@ preencheDadosProdutos(produtoClicado)
                 `label[for="${radioAtual.id}"]`);
               outroLabel.classList.remove('selecionado')
             }
-          })
-        
+          })        
       })
     })
     const resetarSelecao = (radios)=>{
@@ -162,20 +167,17 @@ preencheDadosProdutos(produtoClicado)
         nome: document.querySelector('.detalhes h4').innerHTML,
         modelo: document.querySelector('.detalhes h5').innerHTML,
         preco: document.querySelector('.detalhes h6').innerHTML,
-        tamanho: document.querySelector('input[type="radio"][name="size"]:checked').value
-        
+        tamanho: document.querySelector('input[type="radio"][name="size"]:checked').value  
       }
        console.log(produto);
        cart.push(produto) //adicionar o produto ao carrinho
        console.log(cart);
        // ocultar botao voltar e secao detalhes produtos
-       ocutarBotaoEscoder()
+       ocultarVoltarEsecaoDetalhes()
        sectionCarrinho.style.display="block"
        sectionHero.style.display="none"
        atualizarCarrinho(cart)
        atualizarNumeroItem()
-
-  
     })
     const corpoTabela = document.querySelector(".carrinho tbody")
 
@@ -184,7 +186,6 @@ preencheDadosProdutos(produtoClicado)
         cart.map( produto =>{
           corpoTabela.innerHTML += `
           <tr>
-         
            <td>${produto.id}  </td>
            <td>${produto.nome}  </td>
            <td class="coluna_tamanho">${produto.tamanho}  </td>
@@ -194,28 +195,29 @@ preencheDadosProdutos(produtoClicado)
         
           </tr>`;
         })
-      
 
         const total = cart.reduce( (valorAcumulado, item) =>{
-          return valorAcumulado + parseFloat(item.preco.replace('R$&nbsp;','').replace('.','').replace(',','.'))
+          return valorAcumulado + limparFormatoReal(item.preco);
         },0)
         console.log(total);
          document.querySelector('.coluna_total').innerHTML = formatCurrency(total) 
+         spanSubTotal.innerHTML = formatCurrency(total)
+        spanTotalCompra.innerHTML= formatCurrency(total + valorFrete - valorDesconto)
 
          acaoBotaoApagar()
     }
     const numeroItens = document.querySelector('.numero_itens')
+    numeroItens.style.display = 'none';
     const atualizarNumeroItem = ()=>{
-      numeroItens.innerHTML= cart.length
-   
+      numeroItens.style.display = cart.length  ? 'block' //se tiver item
+        : 'none'; //se não tiver item
+      numeroItens.innerHTML = cart.length;
     }
     const acaoBotaoApagar = () => {
       const botaoApagar = document.querySelectorAll('.coluna_apagar span')
       botaoApagar.forEach(botao => {
         botao.addEventListener('click', () => {
-       
          const id = botao.getAttribute('data-id')
-          
              const posicao = cart.findIndex(item => item.id == id) 
              cart.splice(posicao,1)
              atualizarCarrinho(cart)
@@ -223,3 +225,15 @@ preencheDadosProdutos(produtoClicado)
       })
       atualizarNumeroItem()
     }
+
+    //aula 17 
+    let valorFrete = 10
+    let valorDesconto = 10
+
+   const spanSubTotal = document.querySelector('.sub_total');
+    const spanFrete = document.querySelector('.valor_frete');
+    const spanDesconto = document.querySelector('.valor_desconto');
+    const spanTotalCompra = document.querySelector('.total_compra');
+    spanFrete.innerHTML = formatCurrency(valorFrete)
+    spanDesconto.innerHTML = formatCurrency(valorDesconto);
+   
