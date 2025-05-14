@@ -10,3 +10,10 @@ export const limparFormatoReal = (valor) => {
     valor.replace('R$&nbsp;', '').replace('.', '').replace(',', '.')
   );
 };
+
+  export const ocutarElemeto = (elemeto) => {
+    elemeto.style.display = 'none';
+  };
+  export const mostraElemento = (elemeto, display = 'block') => {
+    elemeto.style.display = display;
+  };

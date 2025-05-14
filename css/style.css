@@ -605,3 +605,16 @@ tfoot{
 .pagamento h2 {
     text-align: center;
 }
+/* validacoes do form */
+.campo-invalido {
+    border-color: red !important;
+}
+
+.campo-valido {
+    border-color: green !important;
+}
+
+.erro {
+    color: red;
+    margin-left: 5px;
+}
